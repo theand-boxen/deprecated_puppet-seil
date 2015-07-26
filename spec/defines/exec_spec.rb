@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'seil::exec' do
-  let(:version) { '10.9.0' }
+  let(:version) { '11.0.0' }
   cli = '/Applications/Seil.app/Contents/Library/bin/seil'
 
   context 'with defaults' do
@@ -47,7 +47,7 @@ describe 'seil::exec' do
       should contain_exec('seil::exec keycode_capslock 80').with({
         :command => "#{cli} keycode_capslock 80",
         :require => "Exec[launch seil#{version}]",
-        :unless => "#{cli} export | grep keycode_capslock 80"
+        :unless => "#{cli} export | grep \"keycode_capslock 80\""
       })
     end
   end
@@ -65,7 +65,7 @@ describe 'seil::exec' do
       should contain_exec('seil::exec keycode_capslock 80').with({
         :command => "#{cli} keycode_capslock 80",
         :require => "Exec[launch seil#{version}]",
-        :onlyif => "#{cli} export | grep keycode_capslock 80"
+        :onlyif => "#{cli} export | grep \"keycode_capslock 80\""
       })
     end
   end
